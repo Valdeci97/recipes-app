@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { SaveLocalStorage } from '../helpers/SaveLocalStorage';
-import rockGlass from '../images/rockGlass.svg';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import * as S from '../styles/login'
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -39,17 +38,8 @@ function Login() {
   };
 
   return (
-
-    <div className="meals">
-      <span className="logo">TRYBE</span>
-      <object
-        className="rocksGlass"
-        type="image/svg+xml"
-        data={ rockGlass }
-      >
-        Glass
-      </object>
-      <form className="d-flex flex-column">
+    <S.Container>
+      <S.Form>
         <label htmlFor="email">
           E-mail&nbsp;
           <input
@@ -76,16 +66,15 @@ function Login() {
         </label>
         &nbsp;
         <button
-          className="btn btn-primary"
           type="button"
           data-testid="login-submit-btn"
           disabled={ isButtonDisable }
           onClick={ () => handleClick() }
         >
-          Entrar
+          Login
         </button>
-      </form>
-    </div>
+      </S.Form>
+    </S.Container>
   );
 }
 
