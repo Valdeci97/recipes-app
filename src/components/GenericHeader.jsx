@@ -2,13 +2,12 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import AppContext from '../context/ContextAPI';
-import './Header.css';
 
 export default function GenericHeader({ value }) {
   const { goesTo } = useContext(AppContext);
 
   return (
-    <div>
+    <>
       <header>
         <button
           type="button"
@@ -26,7 +25,7 @@ export default function GenericHeader({ value }) {
           { value }
         </h1>
       </header>
-    </div>
+    </>
   );
 }
 

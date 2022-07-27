@@ -3,6 +3,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import AppContext from '../context/ContextAPI';
 import foodRadio from '../helpers/foodRadio';
 import drinkRadio from '../helpers/drinkRadio';
+import * as S from '../styles/headerSearchBar';
 
 export default function HeaderSearchBar() {
   const { setFoods, setShowComponent, setDrinks } = useContext(AppContext);
@@ -73,16 +74,14 @@ export default function HeaderSearchBar() {
   };
 
   return (
-    <div>
-      <div>
-        <input
-          type="text"
-          placeholder="pesquisar receita"
-          data-testid="search-input"
-          onChange={ ({ target: { value } }) => setInput(value) }
-        />
-      </div>
-      <form>
+    <S.Container>
+      <S.SearchInput
+        type="text"
+        placeholder="Search recipe"
+        data-testid="search-input"
+        onChange={ ({ target: { value } }) => setInput(value) }
+      />
+      <S.Form>
         <label htmlFor="ingrediente">
           <input
             type="radio"
@@ -92,7 +91,7 @@ export default function HeaderSearchBar() {
             data-testid="ingredient-search-radio"
             onChange={ ({ target }) => handleChange(target) }
           />
-          Ingrediente
+          &nbsp;&nbsp;Ingrediente
         </label>
         <label htmlFor="nome">
           <input
@@ -103,7 +102,7 @@ export default function HeaderSearchBar() {
             data-testid="name-search-radio"
             onChange={ ({ target }) => handleChange(target) }
           />
-          Nome
+          &nbsp;&nbsp;Nome
         </label>
         <label htmlFor="primeira-letra">
           <input
@@ -114,18 +113,16 @@ export default function HeaderSearchBar() {
             data-testid="first-letter-search-radio"
             onChange={ ({ target }) => handleChange(target) }
           />
-          Primeira letra
+          &nbsp;&nbsp;Primeira letra
         </label>
-      </form>
-      <div>
-        <button
-          type="button"
-          data-testid="exec-search-btn"
-          onClick={ () => ingredientResponse(input, radioInput) }
-        >
-          Buscar
-        </button>
-      </div>
-    </div>
+      </S.Form>
+      <S.SearchButton
+        type="button"
+        data-testid="exec-search-btn"
+        onClick={ () => ingredientResponse(input, radioInput) }
+      >
+        Buscar
+      </S.SearchButton>
+    </S.Container>
   );
 }

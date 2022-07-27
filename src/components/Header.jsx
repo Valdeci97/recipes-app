@@ -1,43 +1,40 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import './Header.css';
 import AppContext from '../context/ContextAPI';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import HeaderSearchBar from './HeaderSearchBar';
+import * as S from '../styles/header';
 
 export default function Header({ text }) {
   const { showComponent, setShowComponent, goesTo } = useContext(AppContext);
   return (
-    <div>
-      <header className="header-container">
-        <button
+    <>
+      <S.Container>
+        <S.Button
           type="button"
           onClick={ () => goesTo('perfil') }
-          className="profile-btn"
         >
-          <img
+          <S.Profile
             src={ profileIcon }
             alt="profile-icon"
-            className="profile-button"
             data-testid="profile-top-btn"
           />
-        </button>
+        </S.Button>
         <h1 data-testid="page-title">
           { text }
         </h1>
-        <button
+        <S.Button
           type="button"
           onClick={ () => setShowComponent(!showComponent) }
-          className="search-btn"
         >
-          <img src={ searchIcon } alt="search-icon" data-testid="search-top-btn" />
-        </button>
-      </header>
+          <S.Search src={ searchIcon } alt="search-icon" data-testid="search-top-btn" />
+        </S.Button>
+      </S.Container>
       {
         showComponent ? (<HeaderSearchBar />) : null
       }
-    </div>
+    </>
   );
 }
 
