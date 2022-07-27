@@ -1,52 +1,31 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import * as S from '../styles/categoryButtons';
+
 export default function CategoryButtons({ handleFilterChange, categories, filter }) {
   return (// Componentização dos botões de categorias
-    <div
-      className="btn-group"
-      role="group"
-      aria-label="Basic radio toggle button group"
-    >
-      <input
-        type="checkbox"
-        className="btn-check"
-        name="btnradio"
+    <S.Container>
+      <S.CategoryButton
+        type="button"
         id="All"
-        autoComplete="off"
-        onChange={ (e) => handleFilterChange(e.target.id) }
-        checked={ filter === 'All' }
-      />
-      <label
-        className="btn btn-outline-primary"
-        htmlFor="All"
-        data-testid="All-category-filter"
+        onClick={ ({ target }) => handleFilterChange(target.id) }
+        filter={ filter === 'All' }
       >
         All
-        <input className="btn-check" type="radio" />
-      </label>
+      </S.CategoryButton>
       { categories.map(({ strCategory }, index) => ( // Mapeando os botões de categoria
-        <div key={ `${strCategory}${index}` }>
-          <input
-            type="checkbox"
-            className="btn-check"
-            name="btnradio"
-            id={ strCategory }
-            autoComplete="off"
-            onChange={ (e) => handleFilterChange(e.target.id) }
-            checked={ filter === strCategory }
-          />
-          <label
-            className="btn btn-outline-primary"
-            htmlFor={ strCategory }
-            data-testid={ `${strCategory}-category-filter` }
-          >
-            { strCategory }
-            <input className="btn-check" type="radio" />
-          </label>
-        </div>
+        <S.CategoryButton
+          key={ `${strCategory}${index}` }
+          type="button"
+          id={ strCategory }
+          onClick={ ({ target }) => handleFilterChange(target.id) }
+          filter={ filter === strCategory }
+        >
+          { strCategory }
+        </S.CategoryButton>
       )) }
-    </div>
+    </S.Container>
   );
 }
 
