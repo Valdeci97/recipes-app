@@ -6,7 +6,6 @@ import FetchFoodApi from '../helpers/FetchFoodApi';
 import ContextAPI from '../context/ContextAPI';
 import RecipeCard from '../components/RecipeCard';
 import CategoryButtons from '../components/CategoryButtons';
-import '../components/RecipeCard.css';
 
 export default function Foods() {
   const { setFoods, foods, exploreFoods,
@@ -43,7 +42,6 @@ export default function Foods() {
   };
 
   function whatToRender() {
-    console.log(document.referrer);
     return historyString.includes('/explorar/comidas/ingredientes')
       ? exploreFoods.map((food, index) => (
         <RecipeCard
@@ -82,7 +80,6 @@ export default function Foods() {
             </div>)
       }
       <div
-        className="card-container"
         style={ {
           display: 'flex',
           flexWrap: 'wrap',

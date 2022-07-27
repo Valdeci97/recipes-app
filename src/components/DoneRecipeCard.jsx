@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import './DoneRecipeCard.css';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 
@@ -41,12 +40,10 @@ export default function DoneRecipeCard({ recipe, index }) {
   link[4] = id; // Tratamento do link para o botão de compartilhamento
   return (
     <div // Container do card
-      className="done-card"
       data-testid={ `${index}-recipe-card` }
     >
       <Link to={ `/${type}s/${id}` }>
         <img
-          className="card-image"
           src={ image }
           alt={ `${area} meal` }
           data-testid={ `${index}-horizontal-image` }
@@ -61,7 +58,6 @@ export default function DoneRecipeCard({ recipe, index }) {
           </span>
           <button
             type="button"
-            className="media-btn"
             onClick={ () => showIndividualToast(link.join('/')) }
             style={ { justifySelf: 'flex-end' } }
           >
@@ -69,7 +65,6 @@ export default function DoneRecipeCard({ recipe, index }) {
               data-testid={ `${index}-horizontal-share-btn` }
               src={ shareIcon }
               alt="Share Icon"
-              className="media-btn-img"
             />
           </button>
         </div>

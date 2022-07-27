@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+import * as S from '../styles/recipeCard';
 
 export default function RecipeCard({ recipe, index, place }) {
   const recipeType = recipe.idDrink ? 'Drink' : 'Meal'; // Detecta se está recebendo drinks ou comidas
@@ -9,26 +10,23 @@ export default function RecipeCard({ recipe, index, place }) {
   const image = recipe[`str${recipeType}Thumb`];
   const id = recipe[`id${recipeType}`];
   return (
-    <Link
-      className={ place === 'main' ? 'card' : 'recommended-card' }
-      to={ `/${linkReference}/${id}` }
+    <S.Link
+      href={ `/${linkReference}/${id}` }
       data-testid={ `${index}-recipe-card` }
     >
-      <img
-        className={ place === 'main' ? 'card-img-top' : 'recommended-image' }
+      <S.RecipeImage
         src={ image }
         alt={ `${recipe.strArea} meal` }
         data-testid={ `${index}-card-img` }
       />
-      <h5
-        className="card-title"
+      <S.Description
         data-testid={
           place === 'main' ? `${index}-card-name` : `${index}-recomendation-title`
         }
       >
         {name}
-      </h5>
-    </Link>
+      </S.Description>
+    </S.Link>
   );
 }
 
