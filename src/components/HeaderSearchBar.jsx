@@ -82,7 +82,7 @@ export default function HeaderSearchBar() {
         onChange={ ({ target: { value } }) => setInput(value) }
       />
       <S.Form>
-        <label htmlFor="ingrediente">
+        <S.Label htmlFor="ingrediente">
           <input
             type="radio"
             id="ingrediente"
@@ -92,8 +92,8 @@ export default function HeaderSearchBar() {
             onChange={ ({ target }) => handleChange(target) }
           />
           &nbsp;&nbsp;Ingrediente
-        </label>
-        <label htmlFor="nome">
+        </S.Label>
+        <S.Label htmlFor="nome">
           <input
             type="radio"
             id="nome"
@@ -103,8 +103,8 @@ export default function HeaderSearchBar() {
             onChange={ ({ target }) => handleChange(target) }
           />
           &nbsp;&nbsp;Nome
-        </label>
-        <label htmlFor="primeira-letra">
+        </S.Label>
+        <S.Label htmlFor="primeira-letra">
           <input
             type="radio"
             id="primeira-letra"
@@ -114,7 +114,7 @@ export default function HeaderSearchBar() {
             onChange={ ({ target }) => handleChange(target) }
           />
           &nbsp;&nbsp;Primeira letra
-        </label>
+        </S.Label>
       </S.Form>
       <S.SearchButton
         type="button"

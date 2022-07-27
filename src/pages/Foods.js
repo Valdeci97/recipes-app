@@ -7,6 +7,8 @@ import ContextAPI from '../context/ContextAPI';
 import RecipeCard from '../components/RecipeCard';
 import CategoryButtons from '../components/CategoryButtons';
 
+import { Container } from '../styles/recipeCard';
+
 export default function Foods() {
   const { setFoods, foods, exploreFoods,
     historyString, setHistoryString } = useContext(ContextAPI);
@@ -79,13 +81,7 @@ export default function Foods() {
               <span className="visually-hidden">Loading...</span>
             </div>)
       }
-      <div
-        style={ {
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'space-evenly',
-        } }
-      >
+      <Container>
         {
           foods.length > 0
             ? whatToRender() : (
@@ -97,7 +93,7 @@ export default function Foods() {
               />)
         }
 
-      </div>
+      </Container>
       <Footer />
     </div>
   );
