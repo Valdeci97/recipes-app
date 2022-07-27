@@ -13,22 +13,21 @@ function Login() {
     const passwordSize = 5;
     const passwordLength = password.length > passwordSize;
     const re = /^([\w._-]+)@([\w-]+)\.([\w]{2,8})(\.[\w]{2,8})?$/i;
-    const validateEmail = re.test(String(email));
     // Regex from StackoverFlow - Email validation
-    if (passwordLength && validateEmail) {
+    if (passwordLength && re.test(email)) {
       setIsButtonDisable(false);
     } else {
-      setIsButtonDisable(true);
+      setIsButtonDisable(true)
     }
   };
 
-  const handleChangeEmail = ({ target }) => {
-    setEmail(target.value);
+  const handleChangeEmail = (value) => {
+    setEmail(value);
     isDisabled();
   };
 
-  const handleChangePassword = ({ target }) => {
-    setPassword(target.value);
+  const handleChangePassword = (value) => {
+    setPassword(value);
     isDisabled();
   };
 
@@ -40,39 +39,41 @@ function Login() {
   return (
     <S.Container>
       <S.Form>
-        <label htmlFor="email">
-          E-mail&nbsp;
-          <input
+        <S.Label htmlFor="email">
+          Email
+          <S.Input
             className="form-control"
             type="email"
             id="email"
             name="email"
             data-testid="email-input"
-            placeholder="E-mail"
-            onChange={ handleChangeEmail }
+            placeholder="user@recipesapp.com"
+            value={ email }
+            onChange={ ({ target }) => handleChangeEmail(target.value) }
           />
-        </label>
-        <label htmlFor="password">
+        </S.Label>
+        <S.Label htmlFor="password">
           Password &nbsp;
-          <input
+          <S.Input
             className="form-control"
             type="password"
             id="password"
             name="password"
             data-testid="password-input"
-            placeholder="Password"
-            onChange={ handleChangePassword }
+            placeholder="********"
+            value={ password }
+            onChange={ ({ target }) => handleChangePassword(target.value) }
           />
-        </label>
+        </S.Label>
         &nbsp;
-        <button
+        <S.LoginButton
           type="button"
           data-testid="login-submit-btn"
           disabled={ isButtonDisable }
           onClick={ () => handleClick() }
         >
           Login
-        </button>
+        </S.LoginButton>
       </S.Form>
     </S.Container>
   );
