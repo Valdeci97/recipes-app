@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import ReactLoading from 'react-loading';
 import { useLocation, Link } from 'react-router-dom';
 import fetchDrinkAPI from '../helpers/FetchDrinkAPI';
-import './DrinksIngredients.css';
 import GenericHeader from '../components/GenericHeader';
 import Footer from '../components/Footer';
 import contextAPI from '../context/ContextAPI';

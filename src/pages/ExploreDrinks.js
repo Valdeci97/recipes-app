@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './Explore.css';
 import { useHistory } from 'react-router-dom';
 import GenericHeader from '../components/GenericHeader';
 import Footer from '../components/Footer';

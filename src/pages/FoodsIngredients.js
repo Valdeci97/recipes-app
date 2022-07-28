@@ -3,7 +3,6 @@ import ReactLoading from 'react-loading';
 import { useLocation, Link } from 'react-router-dom';
 import fetchFoodAPI from '../helpers/FetchFoodApi';
 import contextAPI from '../context/ContextAPI';
-import './DrinksIngredients.css';
 import GenericHeader from '../components/GenericHeader';
 import Footer from '../components/Footer';
 

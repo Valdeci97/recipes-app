@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext } from 'react';
 import ReactLoading from 'react-loading';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import './Explore.css';
 import RecipeCard from '../components/RecipeCard';
 import ContextAPI from '../context/ContextAPI';
 import FetchFoodApi from '../helpers/FetchFoodApi';
