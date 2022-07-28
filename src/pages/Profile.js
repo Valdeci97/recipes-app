@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import GenericHeader from '../components/GenericHeader';
+import * as S from '../styles/profile';
 
 export default function Profile() {
   const value = 'Perfil';
@@ -9,37 +10,38 @@ export default function Profile() {
   const { email } = localStorageReturn === null ? '' : JSON.parse(localStorageReturn);
 
   return (
-    <div>
+    <>
       <GenericHeader value={ value } />
-      <h2 data-testid="profile-email">
+      <S.H2 data-testid="profile-email">
         { email }
-      </h2>
-      <Link to="/receitas-feitas">
-        <button
-          data-testid="profile-done-btn"
-          type="button"
-        >
-          Receitas Feitas
-        </button>
-      </Link>
-      <Link to="/receitas-favoritas">
-        <button
-          data-testid="profile-favorite-btn"
-          type="button"
-        >
-          Receitas Favoritas
-        </button>
-      </Link>
-      <Link to="/">
-        <button
-          data-testid="profile-logout-btn"
-          type="button"
-          onClick={ () => localStorage.clear() }
-        >
-          Sair
-        </button>
-      </Link>
+      </S.H2>
+      <S.Container>
+        <Link to="/receitas-feitas">
+          <S.Button
+            type="button"
+          >
+            Receitas Feitas
+          </S.Button>
+        </Link>
+        <Link to="/receitas-favoritas">
+          <S.Button
+            data-testid="profile-favorite-btn"
+            type="button"
+          >
+            Receitas Favoritas
+          </S.Button>
+        </Link>
+        <Link to="/">
+          <S.Button
+            data-testid="profile-logout-btn"
+            type="button"
+            onClick={ () => localStorage.clear() }
+          >
+            Sair
+          </S.Button>
+        </Link>
+      </S.Container>
       <Footer />
-    </div>
+    </>
   );
 }
