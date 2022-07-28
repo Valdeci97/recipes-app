@@ -5,7 +5,7 @@ import fetchDrinkAPI from '../helpers/FetchDrinkAPI';
 import GenericHeader from '../components/GenericHeader';
 import Footer from '../components/Footer';
 import contextAPI from '../context/ContextAPI';
-import * as S from '../styles/drinkIngredients';
+import * as S from '../styles/ingredients';
 
 export default function DrinksIngredients() {
   const [ingredientsList, setIngredientsList] = useState([]);

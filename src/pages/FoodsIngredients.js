@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import ReactLoading from 'react-loading';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import fetchFoodAPI from '../helpers/FetchFoodApi';
 import contextAPI from '../context/ContextAPI';
 import GenericHeader from '../components/GenericHeader';
 import Footer from '../components/Footer';
+import * as S from '../styles/ingredients';
 
 export default function FoodsIngredients() {
   const [ingredientsList, setIngredientsList] = useState([]);
@@ -26,35 +27,27 @@ export default function FoodsIngredients() {
   }, []);
 
   return (
-    <div>
+    <>
       <GenericHeader value={ value } />
-      <div className="ingredients-list">
-        <h1>
-          ExploreIngredients
-        </h1>
+      <S.Container>
         {
           ingredientsList
             ? ingredientsList.map((ingredient, index) => (
-              <Link
-                to="/comidas"
-                className="ingredient"
+              <S.Link
+                href="/comidas"
                 key={ index }
                 data-testid={ `${index}-ingredient-card` }
                 onClick={ () => setByIngredient(ingredient.strIngredient) }
               >
-                <img
-                  className="ingredient-img"
+                <S.Image
                   src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
                   alt={ ingredient.strIngredient }
                   data-testid={ `${index}-card-img` }
                 />
-                <p
-                  data-testid={ `${index}-card-name` }
-                  className="ingredient-name"
-                >
+                <p data-testid={ `${index}-card-name` }>
                   {ingredient.strIngredient}
                 </p>
-              </Link>
+              </S.Link>
             ))
             : (
               <ReactLoading
@@ -64,8 +57,8 @@ export default function FoodsIngredients() {
                 width={ 30 }
               />)
         }
-      </div>
+      </S.Container>
       <Footer />
-    </div>
+    </>
   );
 }
