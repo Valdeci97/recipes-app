@@ -2,15 +2,15 @@ import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactLoading from 'react-loading';
-// import placeHolder from '../tests/placeHolder';
 import shareIcon from '../images/shareIcon.svg';
-import './FoodsRecipes.css';
 import fetchDrinkAPI from '../helpers/FetchDrinkAPI';
 import ContextAPI from '../context/ContextAPI';
 import favorite from '../images/whiteHeartIcon.svg';
 import favoriteChecked from '../images/blackHeartIcon.svg';
 
-export default function FoodsRecipes({ match, location }) {
+import * as S from '../styles/recipes';
+
+export default function DrinkRecipes({ match, location }) {
   const {
     ingredientsAndMeasures, handleStartRecipe, ingredientsToNumbersArray,
     buttonTextHandler, shareRecipe, showToast, handleFavorite,
@@ -52,18 +52,17 @@ export default function FoodsRecipes({ match, location }) {
   }, [urlID, pathName]);
 
   return (
-    <div className="all">
+    <>
       { drinkSelected ? (
-        <div>
-          <img
+        <S.Container>
+          <S.RecipeImage
             src={ drinkSelected[0].strDrinkThumb }
             alt={ drinkSelected[0].strDrink }
             data-testid="recipe-photo"
             className="recipe-photo"
           />
-          <div>
-            <h1 data-testid="recipe-title">{drinkSelected[0].strDrink}</h1>
-            <button
+          <S.RecipeContainer>
+            <S.ShareButton
               type="button"
               data-testid="share-btn"
               className="media-btn"
@@ -74,8 +73,9 @@ export default function FoodsRecipes({ match, location }) {
                 alt="Share Icon"
                 className="media-btn-img"
               />
-            </button>
-            <button
+            </S.ShareButton>
+            <S.RecipeTitle data-testid="recipe-title">{drinkSelected[0].strDrink}</S.RecipeTitle>
+            <S.SaveButton
               type="button"
               className="media-btn"
               onClick={ () => handleFavorite(
@@ -88,21 +88,19 @@ export default function FoodsRecipes({ match, location }) {
                 alt="Favorite Icon"
                 className="media-btn-img"
               />
-            </button>
-          </div>
-          <p data-testid="recipe-category">{drinkSelected[0].strAlcoholic}</p>
-          <h3>Ingredients</h3>
+            </S.SaveButton>
+          </S.RecipeContainer>
+          <S.H3>Ingredients</S.H3>
           { ingredientsAndMeasures(drinkSelected[0], type, 'detail') }
-          <h3>Instructions</h3>
+          <S.H3>Instructions</S.H3>
           <p
             data-testid="instructions"
             className="instructions"
+            style={ { textAlign: "center" } }
           >
             {drinkSelected[0].strInstructions}
-
           </p>
-          <h3>Recomendadas</h3>
-          <button
+          <S.RecipeButton
             type="button"
             data-testid="start-recipe-btn"
             className="star-recipe-btn"
@@ -115,9 +113,9 @@ export default function FoodsRecipes({ match, location }) {
             ) }
           >
             { buttonTextHandler(type, urlID) }
-          </button>
+          </S.RecipeButton>
           {showToast}
-        </div>
+        </S.Container>
       ) : (
         <ReactLoading
           type="spinningBubbles"
@@ -126,11 +124,11 @@ export default function FoodsRecipes({ match, location }) {
           width={ 30 }
         />
       )}
-    </div>
+    </>
   );
 }
 
-FoodsRecipes.propTypes = {
+DrinkRecipes.propTypes = {
   match: PropTypes.shape().isRequired,
   location: PropTypes.shape().isRequired,
 };

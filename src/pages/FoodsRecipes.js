@@ -7,7 +7,7 @@ import ContextAPI from '../context/ContextAPI';
 import favorite from '../images/whiteHeartIcon.svg';
 import favoriteChecked from '../images/blackHeartIcon.svg';
 
-import * as S from '../styles/foodsRecipes';
+import * as S from '../styles/recipes';
 
 export default function FoodsRecipes({ match, location }) {
   const {
@@ -101,7 +101,6 @@ export default function FoodsRecipes({ match, location }) {
             >
               <p>Your browser does not support this content</p>
             </S.Iframe>)}
-          <S.H3>Recomendadas</S.H3>
           <S.RecipeButton
             type="button"
             data-testid="start-recipe-btn"

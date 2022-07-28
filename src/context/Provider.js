@@ -7,7 +7,7 @@ import {
   saveFavoriteRecipes, removeFromFavoriteRecipes,
   saveDoneRecipes } from '../helpers/SaveLocalStorage';
 import Checkbox from '../components/Checkbox';
-import { List } from '../styles/foodsRecipes';
+import { List } from '../styles/recipes';
 
 const copy = require('clipboard-copy');
 
