@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import GenericHeader from '../components/GenericHeader';
 import Footer from '../components/Footer';
+import * as S from '../styles/explore';
 
 export default function Explore() {
   const value = 'Explorar';
@@ -10,26 +11,26 @@ export default function Explore() {
     history.push(`/${page}`);
   };
   return (
-    <div>
+    <>
       <GenericHeader value={ value } />
-      <div>
-        <button
+      <S.Container>
+        <S.Button
           type="button"
           data-testid="explore-food"
           onClick={ () => handleClick('explorar/comidas') }
         >
           Explorar Comidas
-        </button>
+        </S.Button>
 
-        <button
+        <S.Button
           type="button"
           data-testid="explore-drinks"
           onClick={ () => handleClick('explorar/bebidas') }
         >
           Explorar Bebidas
-        </button>
-      </div>
+        </S.Button>
+      </S.Container>
       <Footer />
-    </div>
+    </>
   );
 }

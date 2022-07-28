@@ -8,6 +8,7 @@ export const Container = styled.footer`
 `;
 
 export const Button = styled.button`
+  background: transparent;
   border: none;
 `;
 

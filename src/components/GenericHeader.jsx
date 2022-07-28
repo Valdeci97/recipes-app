@@ -15,16 +15,16 @@ export default function GenericHeader({ value }) {
           onClick={ () => goesTo('perfil') }
           className="profile-btn"
         >
-          <img
+          <S.Image
             src={ profileIcon }
             alt="profile-icon"
             data-testid="profile-top-btn"
             className="profile-button"
           />
         </S.ProfileButton>
-        <h1 data-testid="page-title">
+        <S.Title data-testid="page-title">
           { value }
-        </h1>
+        </S.Title>
       </S.Container>
     </>
   );
