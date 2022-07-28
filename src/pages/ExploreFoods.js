@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import './Explore.css';
 import GenericHeader from '../components/GenericHeader';
 import Footer from '../components/Footer';
+import * as S from '../styles/exploreFood';
 
 export default function ExploreFoods() {
   const [idFoodRandom, setIdFoodRandom] = useState();
@@ -25,39 +25,33 @@ export default function ExploreFoods() {
   });
 
   return (
-    <div>
+    <>
       <GenericHeader value={ value } />
-      <div className="text-center m-1">
-        <h2>Explorar Comida</h2>
-        <div className="fourth-color d-flex flex-column explore-containter">
-          <button
-            type="button"
-            className="btn btn-explore"
-            data-testid="explore-by-ingredient"
-            onClick={ () => handleClick('explorar/comidas/ingredientes') }
-          >
-            Por Ingredientes
-          </button>
+      <S.Container>
+        <S.Button
+          type="button"
+          data-testid="explore-by-ingredient"
+          onClick={ () => handleClick('explorar/comidas/ingredientes') }
+        >
+          Por Ingredientes
+        </S.Button>
 
-          <button
-            type="button"
-            className="btn btn-explore"
-            data-testid="explore-by-area"
-            onClick={ () => handleClick('explorar/comidas/area') }
-          >
-            Por Local de Origem
-          </button>
-          <button
-            type="button"
-            className="btn btn-explore"
-            data-testid="explore-surprise"
-            onClick={ () => handleClick(`comidas/${idFoodRandom}`) }
-          >
-            Me Surpreenda!
-          </button>
-        </div>
-      </div>
+        <S.Button
+          type="button"
+          data-testid="explore-by-area"
+          onClick={ () => handleClick('explorar/comidas/area') }
+        >
+          Por Local de Origem
+        </S.Button>
+        <S.Button
+          type="button"
+          data-testid="explore-surprise"
+          onClick={ () => handleClick(`comidas/${idFoodRandom}`) }
+        >
+          Me Surpreenda!
+        </S.Button>
+      </S.Container>
       <Footer />
-    </div>
+    </>
   );
 }
