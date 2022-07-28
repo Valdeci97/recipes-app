@@ -3,6 +3,7 @@ import './Explore.css';
 import { useHistory } from 'react-router-dom';
 import GenericHeader from '../components/GenericHeader';
 import Footer from '../components/Footer';
+import * as S from '../styles/explore';
 
 export default function ExploreDrinks() {
   const [idDrinksRandom, setIdDrinksRandom] = useState();
@@ -24,31 +25,25 @@ export default function ExploreDrinks() {
   });
 
   return (
-    <div>
+    <>
       <GenericHeader value={ value } />
-      <div className="text-center m-1">
-        <h2>Explorar Bebidas</h2>
-        <div className="fourth-color d-flex flex-column explore-containter">
-          <button
-            type="button"
-            className="btn btn-explore"
-            data-testid="explore-by-ingredient"
-            onClick={ () => handleClick('explorar/bebidas/ingredientes') }
-          >
-            Por Ingredientes
-          </button>
-
-          <button
-            type="button"
-            className="btn btn-explore"
-            data-testid="explore-surprise"
-            onClick={ () => handleClick(`bebidas/${idDrinksRandom}`) }
-          >
-            Me Surpreenda!
-          </button>
-        </div>
-      </div>
+      <S.Container>
+        <S.Button
+          type="button"
+          data-testid="explore-by-ingredient"
+          onClick={ () => handleClick('explorar/bebidas/ingredientes') }
+        >
+          Por Ingredientes
+        </S.Button>
+        <S.Button
+          type="button"
+          data-testid="explore-surprise"
+          onClick={ () => handleClick(`bebidas/${idDrinksRandom}`) }
+        >
+          Me Surpreenda!
+        </S.Button>
+      </S.Container>
       <Footer />
-    </div>
+    </>
   );
 }
