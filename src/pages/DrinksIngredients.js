@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import ReactLoading from 'react-loading';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import fetchDrinkAPI from '../helpers/FetchDrinkAPI';
 import GenericHeader from '../components/GenericHeader';
 import Footer from '../components/Footer';
 import contextAPI from '../context/ContextAPI';
+import * as S from '../styles/drinkIngredients';
 
 export default function DrinksIngredients() {
   const [ingredientsList, setIngredientsList] = useState([]);
@@ -27,32 +28,27 @@ export default function DrinksIngredients() {
   }, []);
 
   return (
-    <div>
+    <>
       <GenericHeader value={ value } />
-      <div className="ingredients-list">
+      <S.Container>
         {
           ingredientsList
             ? ingredientsList.map((ingredient, index) => (
-              <Link
-                to="/bebidas"
-                className="ingredient"
+              <S.Link
+                href="/bebidas"
                 key={ index }
                 data-testid={ `${index}-ingredient-card` }
                 onClick={ () => setByIngredient(ingredient.strIngredient1) }
               >
-                <img
-                  className="ingredient-img"
+                <S.Image
                   src={ `https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}-Small.png` }
                   alt={ ingredient.strIngredient1 }
                   data-testid={ `${index}-card-img` }
                 />
-                <p
-                  data-testid={ `${index}-card-name` }
-                  className="ingredient-name"
-                >
+                <p data-testid={ `${index}-card-name` }>
                   {ingredient.strIngredient1}
                 </p>
-              </Link>
+              </S.Link>
             ))
             : (
               <ReactLoading
@@ -62,8 +58,8 @@ export default function DrinksIngredients() {
                 width={ 30 }
               />)
         }
-      </div>
+      </S.Container>
       <Footer />
-    </div>
+    </>
   );
 }
