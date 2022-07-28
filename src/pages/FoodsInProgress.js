@@ -1,9 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 import ReactLoading from 'react-loading';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import shareIcon from '../images/shareIcon.svg';
-import './FoodsInProgress.css';
 import fetchFoodAPI from '../helpers/FetchFoodApi';
 import ContextAPI from '../context/ContextAPI';
 import favorite from '../images/whiteHeartIcon.svg';
@@ -52,7 +50,7 @@ export default function FoodsInProgress({ match, location }) {
   }, [urlID, pathName]);
 
   return (
-    <div className="all">
+    <div>
       { foodSelected ? (
         <div>
           <img
@@ -61,23 +59,20 @@ export default function FoodsInProgress({ match, location }) {
             data-testid="recipe-photo"
             className="recipe-photo"
           />
-          <div className="title-share-favorite">
+          <div>
             <h1 data-testid="recipe-title">{foodSelected[0].strMeal}</h1>
             <button
               type="button"
               data-testid="share-btn"
-              className="media-btn"
               onClick={ shareRecipe }
             >
               <img
                 src={ shareIcon }
                 alt="Share Icon"
-                className="media-btn-img"
               />
             </button>
             <button
               type="button"
-              className="media-btn"
               onClick={ () => handleFavorite(
                 isFavorite, [favorite, favoriteChecked], setIsFavorite, foodSelected[0],
               ) }
@@ -86,7 +81,6 @@ export default function FoodsInProgress({ match, location }) {
                 src={ isFavorite }
                 data-testid="favorite-btn"
                 alt="Favorite Icon"
-                className="media-btn-img"
               />
             </button>
           </div>
@@ -100,7 +94,6 @@ export default function FoodsInProgress({ match, location }) {
           <h3>Instructions</h3>
           <p
             data-testid="instructions"
-            className="instructions-in-progress"
           >
             {foodSelected[0].strInstructions}
 
@@ -108,7 +101,6 @@ export default function FoodsInProgress({ match, location }) {
           <button
             type="button"
             data-testid="finish-recipe-btn"
-            className="finish-recipe-btn"
             disabled={ isDisabled }
             onClick={ () => handleFinish(foodSelected[0]) }
           >

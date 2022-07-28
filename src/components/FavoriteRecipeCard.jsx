@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import * as S from '../styles/favoriteRecipes';
 
 const copy = require('clipboard-copy');
 
@@ -38,61 +39,48 @@ export default function FavoriteRecipeCard({ recipe, index, removeFavorite }) {
   link[3] = `${type}s`;
   link[4] = id; // Tratamento do link para o botão de compartilhamento
   return (
-    <div // Container do card
-      className="done-card"
+    <S.Container // Container do card
       data-testid={ `${index}-recipe-card` }
     >
       <Link to={ `/${type}s/${id}` }>
-        <img
-          className="card-image"
+        <S.Image
           src={ image }
           alt={ `${area} meal` }
           data-testid={ `${index}-horizontal-image` }
-          width={ 130 }
         />
       </Link>
       <div>
         <div>
-          <span className="recipe-type" data-testid={ `${index}-horizontal-top-text` }>
-            { `${alcoholicOrNot.length > 0 ? alcoholicOrNot : area} - ${category}` }
-          </span>
-          <Link to={ `/${type}s/${id}` }>
+          <S.Link href={ `/${type}s/${id}` }>
             <h6 data-testid={ `${index}-horizontal-name` }>
               {name}
             </h6>
-          </Link>
+          </S.Link>
         </div>
-        <div style={ { display: 'flex', justifyContent: 'space-between', width: 150 } }>
-          <button
+        <S.ButtonContainer>
+          <S.ShareButton
             type="button"
-            className="media-btn"
             onClick={ () => showIndividualToast(link.join('/')) }
-            style={ { marginTop: 20 } }
           >
             <img
               data-testid={ `${index}-horizontal-share-btn` }
               src={ shareIcon }
               alt="Share Icon"
-              className="media-btn-img"
             />
-          </button>
-          {showToast}
-          <button
+          </S.ShareButton>
+          <S.SaveButton
             type="button"
-            className="media-btn"
-            style={ { marginTop: 20 } }
             onClick={ () => removeFavorite(index) }
           >
             <img
               data-testid={ `${index}-horizontal-favorite-btn` }
               src={ blackHeartIcon }
               alt="Share Icon"
-              className="media-btn-img"
             />
-          </button>
-        </div>
+          </S.SaveButton>
+        </S.ButtonContainer>
       </div>
-    </div>
+    </S.Container>
   );
 }
 

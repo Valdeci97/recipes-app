@@ -1,9 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 import ReactLoading from 'react-loading';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import shareIcon from '../images/shareIcon.svg';
-import './FoodsInProgress.css';
 import fetchDrinkAPI from '../helpers/FetchDrinkAPI';
 import ContextAPI from '../context/ContextAPI';
 import favorite from '../images/whiteHeartIcon.svg';
@@ -52,7 +50,7 @@ export default function DrinksInProgress({ match, location }) {
   }, [urlID, pathName]);
 
   return (
-    <div className="all">
+    <div>
       { drinkSelected ? (
         <div>
           <img
@@ -61,23 +59,20 @@ export default function DrinksInProgress({ match, location }) {
             data-testid="recipe-photo"
             className="recipe-photo"
           />
-          <div className="title-share-favorite">
+          <div>
             <h1 data-testid="recipe-title">{drinkSelected[0].strDrink}</h1>
             <button
               type="button"
               data-testid="share-btn"
-              className="media-btn"
               onClick={ shareRecipe }
             >
               <img
                 src={ shareIcon }
                 alt="Share Icon"
-                className="media-btn-img"
               />
             </button>
             <button
               type="button"
-              className="media-btn"
               onClick={ () => handleFavorite(
                 isFavorite, [favorite, favoriteChecked], setIsFavorite, drinkSelected[0],
               ) }
@@ -86,7 +81,6 @@ export default function DrinksInProgress({ match, location }) {
                 src={ isFavorite }
                 data-testid="favorite-btn"
                 alt="Favorite Icon"
-                className="media-btn-img"
               />
             </button>
           </div>
@@ -98,17 +92,12 @@ export default function DrinksInProgress({ match, location }) {
             onChange={ () => checkDisabled() }
           />
           <h3>Instructions</h3>
-          <p
-            data-testid="instructions"
-            className="instructions-in-progress"
-          >
+          <p data-testid="instructions">
             {drinkSelected[0].strInstructions}
-
           </p>
           <button
             type="button"
             data-testid="finish-recipe-btn"
-            className="finish-recipe-btn"
             disabled={ isDisabled }
             onClick={ () => handleFinish(drinkSelected[0]) }
           >
