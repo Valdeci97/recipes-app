@@ -7,6 +7,7 @@ import {
   saveFavoriteRecipes, removeFromFavoriteRecipes,
   saveDoneRecipes } from '../helpers/SaveLocalStorage';
 import Checkbox from '../components/Checkbox';
+import { List } from '../styles/foodsRecipes';
 
 const copy = require('clipboard-copy');
 
@@ -80,7 +81,7 @@ function Provider({ children }) {
     for (let index = 0; index <= RANGE; index += 1) {
       if (arrayOfData[0][index] !== '' && arrayOfData[0][index] !== null) {
         concatenated.push(
-          <li key={ `item${index}` }>
+          <List key={ `item${index}` }>
             {pageType === 'detail'
               ? (
                 <p
@@ -100,7 +101,7 @@ function Provider({ children }) {
                 />
 
               )}
-          </li>,
+          </List>,
         );
       }
     }

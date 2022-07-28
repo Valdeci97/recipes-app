@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactLoading from 'react-loading';
 // import placeHolder from '../tests/placeHolder';
 import shareIcon from '../images/shareIcon.svg';
-import Carousel from '../components/Carousel';
 import './FoodsRecipes.css';
 import fetchDrinkAPI from '../helpers/FetchDrinkAPI';
 import ContextAPI from '../context/ContextAPI';
@@ -103,9 +102,6 @@ export default function FoodsRecipes({ match, location }) {
 
           </p>
           <h3>Recomendadas</h3>
-          <Carousel
-            genre="Drink"
-          />
           <button
             type="button"
             data-testid="start-recipe-btn"

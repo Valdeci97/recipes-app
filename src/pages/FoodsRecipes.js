@@ -1,15 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 import ReactLoading from 'react-loading';
-// import placeHolder from '../tests/placeHolder';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import shareIcon from '../images/shareIcon.svg';
-import Carousel from '../components/Carousel';
-import './FoodsRecipes.css';
 import fetchFoodAPI from '../helpers/FetchFoodApi';
 import ContextAPI from '../context/ContextAPI';
 import favorite from '../images/whiteHeartIcon.svg';
 import favoriteChecked from '../images/blackHeartIcon.svg';
+
+import * as S from '../styles/foodsRecipes';
 
 export default function FoodsRecipes({ match, location }) {
   const {
@@ -53,77 +51,60 @@ export default function FoodsRecipes({ match, location }) {
   }, [urlID, pathName]);
 
   return (
-    <div className="all">
+    <>
       { foodSelected ? (
-
-        <div>
-          <img
+        <S.Container>
+          <S.RecipeImage
             src={ foodSelected[0].strMealThumb }
             alt={ foodSelected[0].strMeal }
             data-testid="recipe-photo"
-            className="recipe-photo"
           />
-          <div className="title-share-favorite">
-            <h1 data-testid="recipe-title">{foodSelected[0].strMeal}</h1>
-            <button
+          <S.RecipeContainer>
+            <S.ShareButton
               type="button"
               data-testid="share-btn"
-              className="media-btn"
               onClick={ shareRecipe }
             >
               <img
                 src={ shareIcon }
                 alt="Share Icon"
-                className="media-btn-img"
               />
-            </button>
-
-            <button
+            </S.ShareButton>
+            <S.RecipeTitle data-testid="recipe-title">{foodSelected[0].strMeal}</S.RecipeTitle>
+            <S.SaveButton
               onClick={ () => handleFavorite(
                 isFavorite, [favorite, favoriteChecked], setIsFavorite, foodSelected[0],
               ) }
               type="button"
-              className="media-btn"
             >
               <img
                 data-testid="favorite-btn"
                 src={ isFavorite }
                 alt="Favorite Icon"
-                className="media-btn-img"
               />
-            </button>
-          </div>
-          <p data-testid="recipe-category">{foodSelected[0].strCategory}</p>
-          <h3>Ingredients</h3>
+            </S.SaveButton>
+          </S.RecipeContainer>
+          <S.H3>Ingredients</S.H3>
           { ingredientsAndMeasures(foodSelected[0], type, 'detail') }
-          <h3>Instructions</h3>
-          <p
-            data-testid="instructions"
-            className="instructions"
-          >
+          <S.H3>Instructions</S.H3>
+          <S.Instructions>
             {foodSelected[0].strInstructions}
-
-          </p>
-          <h3>Video</h3>
+          </S.Instructions>
+          <S.H3>Video</S.H3>
           {foodSelected[0].strYoutube === '' ? (
             <p>No video avaiable</p>
           ) : (
-            <iframe
+            <S.Iframe
               data-testid="video"
               title="Recipe Video"
-              className="video-frame"
               src={ foodSelected[0].strYoutube.replace('watch?v=', 'embed/') }
             >
               <p>Your browser does not support this content</p>
-            </iframe>)}
-          <h3>Recomendadas</h3>
-          <Carousel
-            genre="Meal"
-          />
-          <button
+            </S.Iframe>)}
+          <S.H3>Recomendadas</S.H3>
+          <S.RecipeButton
             type="button"
             data-testid="start-recipe-btn"
-            className="star-recipe-btn"
             style={ buttonVisible }
             onClick={ () => handleStartRecipe(
               pathName,
@@ -133,9 +114,9 @@ export default function FoodsRecipes({ match, location }) {
             ) }
           >
             { buttonTextHandler(type, urlID) }
-          </button>
+          </S.RecipeButton>
           {showToast}
-        </div>
+        </S.Container>
       ) : (
         <ReactLoading
           type="spinningBubbles"
@@ -144,7 +125,7 @@ export default function FoodsRecipes({ match, location }) {
           width={ 30 }
         />
       )}
-    </div>
+    </>
   );
 }
 
