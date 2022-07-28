@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 import ContextAPI from '../context/ContextAPI';
 import FetchFoodApi from '../helpers/FetchFoodApi';
+import Select from '../styles/ingredientsByArea';
 
 export default function ExploreFoodArea() {
   const value = 'Explorar Origem';
@@ -37,13 +38,12 @@ export default function ExploreFoodArea() {
   });
 
   return (
-    <div>
+    <>
       <Header text={ value } />
-      <div className="text-center m-1">
+      <div>
         <div>
-          <select
+          <Select
             className="form-control"
-            data-testid="explore-by-area-dropdown"
             id="selectArea"
             value={ selectedArea }
             onChange={ ({ target }) => setSelectedArea(target.value) }
@@ -65,11 +65,10 @@ export default function ExploreFoodArea() {
                 </option>
               ))
               : <option> - </option>}
-          </select>
+          </Select>
 
         </div>
         <div
-          className="card-container"
           style={ {
             display: 'flex',
             flexWrap: 'wrap',
@@ -96,6 +95,6 @@ export default function ExploreFoodArea() {
         </div>
       </div>
       <Footer />
-    </div>
+    </>
   );
 }
