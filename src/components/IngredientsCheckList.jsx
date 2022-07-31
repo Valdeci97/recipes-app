@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useContext } from 'react';
 import AppContext from '../context/ContextAPI';
+import { Ingredients } from '../styles/inProgress';
 
 export default function IngredientsCheckList({ recipeData, type, urlID, onChange }) {
   const { ingredientsAndMeasures } = useContext(AppContext);
@@ -25,10 +26,10 @@ export default function IngredientsCheckList({ recipeData, type, urlID, onChange
     isItChecked();
   }, [type, urlID]);
   return (
-    <div onChange={ () => onChange() }>
+    <Ingredients onChange={ () => onChange() }>
       <h3>Ingredients</h3>
       { ingredientsAndMeasures(recipeData, type, '', [type, urlID]) }
-    </div>
+    </Ingredients>
   );
 }
 
