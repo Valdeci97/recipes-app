@@ -12,7 +12,7 @@ import * as S from '../styles/recipes';
 export default function FoodsRecipes({ match, location }) {
   const {
     ingredientsAndMeasures, handleStartRecipe, ingredientsToNumbersArray,
-    buttonTextHandler, shareRecipe, showToast, handleFavorite,
+    buttonTextHandler, shareRecipe, handleFavorite,
   } = useContext(ContextAPI);
   const [isNotDone, setIsNotDone] = useState(false);
   const [isFavorite, setIsFavorite] = useState(favorite);
@@ -114,7 +114,6 @@ export default function FoodsRecipes({ match, location }) {
           >
             { buttonTextHandler(type, urlID) }
           </S.RecipeButton>
-          {showToast}
         </S.Container>
       ) : (
         <ReactLoading

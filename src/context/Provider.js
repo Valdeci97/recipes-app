@@ -18,11 +18,7 @@ function Provider({ children }) {
   const [drinks, setDrinks] = useState([]);
   const [exploreDrinks, setExploreDrinks] = useState([]);
   const [showComponent, setShowComponent] = useState(false);
-  const [showToast, setShowToast] = useState(
-    <span className="copied-link">Link copiado!</span>,
-  );
   const history = useHistory();
-  const THREE_SECONDS = 3000;
   const STEP_CHECKED = 'ingredient-step--checked';
 
   function shareRecipe() {
@@ -30,14 +26,7 @@ function Provider({ children }) {
     const link = `${splitted[0]}/${splitted[1]}/${splitted[2]}/${
       splitted[3]}/${splitted[4]}`;
     copy(link);
-    setShowToast(
-      <span className="copied-link copied-link--active">Link copiado!</span>,
-    );
-    setTimeout(() => {
-      setShowToast(
-        <span className="copied-link">Link copiado!</span>,
-      );
-    }, THREE_SECONDS);
+    window.alert('Link copiado com sucesso!');
   }
 
   function handleFavorite(isFavorite, arrayOfHearts, setIsFavorite, obj) {
@@ -180,8 +169,8 @@ function Provider({ children }) {
 
   const goesTo = (path) => history.push(`/${path}`);
 
-  const context = { foods,
-    showToast,
+  const context = {
+    foods,
     drinks,
     exploreDrinks,
     exploreFoods,
