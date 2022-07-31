@@ -7,6 +7,7 @@ import ContextAPI from '../context/ContextAPI';
 import favorite from '../images/whiteHeartIcon.svg';
 import favoriteChecked from '../images/blackHeartIcon.svg';
 import IngredientsCheckList from '../components/IngredientsCheckList';
+import * as S from '../styles/inProgress';
 
 export default function DrinksInProgress({ match, location }) {
   const {
@@ -50,40 +51,42 @@ export default function DrinksInProgress({ match, location }) {
   }, [urlID, pathName]);
 
   return (
-    <div>
+    <>
       { drinkSelected ? (
-        <div>
-          <img
+        <S.Container>
+          <S.Image
             src={ drinkSelected[0].strDrinkThumb }
             alt={ drinkSelected[0].strDrink }
             data-testid="recipe-photo"
             className="recipe-photo"
           />
-          <div>
+          <S.RecipeDetails>
             <h1 data-testid="recipe-title">{drinkSelected[0].strDrink}</h1>
-            <button
-              type="button"
-              data-testid="share-btn"
-              onClick={ shareRecipe }
-            >
-              <img
-                src={ shareIcon }
-                alt="Share Icon"
-              />
-            </button>
-            <button
-              type="button"
-              onClick={ () => handleFavorite(
-                isFavorite, [favorite, favoriteChecked], setIsFavorite, drinkSelected[0],
-              ) }
-            >
-              <img
-                src={ isFavorite }
-                data-testid="favorite-btn"
-                alt="Favorite Icon"
-              />
-            </button>
-          </div>
+            <S.RecipeButtonContainer>
+              <S.RecipeButton
+                type="button"
+                data-testid="share-btn"
+                onClick={ shareRecipe }
+              >
+                <img
+                  src={ shareIcon }
+                  alt="Share Icon"
+                />
+              </S.RecipeButton>
+              <S.RecipeButton
+                type="button"
+                onClick={ () => handleFavorite(
+                  isFavorite, [favorite, favoriteChecked], setIsFavorite, drinkSelected[0],
+                ) }
+              >
+                <img
+                  src={ isFavorite }
+                  data-testid="favorite-btn"
+                  alt="Favorite Icon"
+                />
+              </S.RecipeButton>
+            </S.RecipeButtonContainer>
+          </S.RecipeDetails>
           <p data-testid="recipe-category">{drinkSelected[0].strCategory}</p>
           <IngredientsCheckList
             recipeData={ drinkSelected[0] }
@@ -95,16 +98,15 @@ export default function DrinksInProgress({ match, location }) {
           <p data-testid="instructions">
             {drinkSelected[0].strInstructions}
           </p>
-          <button
+          <S.FinishRecipeButton
             type="button"
             data-testid="finish-recipe-btn"
             disabled={ isDisabled }
             onClick={ () => handleFinish(drinkSelected[0]) }
           >
             Finalizar Receita
-          </button>
-          {showToast}
-        </div>
+          </S.FinishRecipeButton>
+        </S.Container>
       ) : (
         <ReactLoading
           type="spinningBubbles"
@@ -113,7 +115,7 @@ export default function DrinksInProgress({ match, location }) {
           width={ 30 }
         />
       )}
-    </div>
+    </>
   );
 }
 
