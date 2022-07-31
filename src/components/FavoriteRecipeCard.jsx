@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -8,29 +8,14 @@ import * as S from '../styles/favoriteRecipes';
 const copy = require('clipboard-copy');
 
 export default function FavoriteRecipeCard({ recipe, index, removeFavorite }) {
-  const [showToast, setShowToast] = useState(
-    <span className="copied-link">Link copiado!</span>,
-  );
-
-  // Função criada separadamente pq o toast gerado no context ativaria para todos os cards simultaneamente
-  function showIndividualToast(link) {
-    const THREE_SECONDS = 3000;
+  function copyLink(link) {
     copy(link);
-    setShowToast(
-      <span className="copied-link copied-link--active">Link copiado!</span>,
-    );
-    return setTimeout(() => {
-      setShowToast(
-        <span className="copied-link">Link copiado!</span>,
-      );
-    }, THREE_SECONDS);
+    window.alert('Link copiado com sucesso!');
   }
 
   const {
     type,
     id,
-    category,
-    alcoholicOrNot,
     area,
     image,
     name,
@@ -60,7 +45,7 @@ export default function FavoriteRecipeCard({ recipe, index, removeFavorite }) {
         <S.ButtonContainer>
           <S.ShareButton
             type="button"
-            onClick={ () => showIndividualToast(link.join('/')) }
+            onClick={ () => copyLink(link.join('/')) }
           >
             <img
               data-testid={ `${index}-horizontal-share-btn` }
@@ -75,7 +60,7 @@ export default function FavoriteRecipeCard({ recipe, index, removeFavorite }) {
             <img
               data-testid={ `${index}-horizontal-favorite-btn` }
               src={ blackHeartIcon }
-              alt="Share Icon"
+              alt="Favorite Icon"
             />
           </S.SaveButton>
         </S.ButtonContainer>

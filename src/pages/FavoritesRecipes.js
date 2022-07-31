@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import GenericHeader from '../components/GenericHeader';
 import FavoriteRecipeCard from '../components/FavoriteRecipeCard';
+import { CategoriesContainer, CategoryButton } from '../styles/favoriteRecipes';
 
 export default function FavoriteRecipes() {
   const [favoriteRecipes, setRecipes] = useState([]);
@@ -23,37 +24,23 @@ export default function FavoriteRecipes() {
   return (
     <div>
       <GenericHeader value={ value } />
-      <div // Container dos botões de filtro tentei usar os mesmos da página inicial, mas os testes existem id's e tratamentos difernetes
-        className="btn-group"
-        role="group"
-        aria-label="Basic radio toggle button group"
-      >
+      <CategoriesContainer>
         { categorias.map((cat, i) => {
           let filterName = cat === 'food' ? 'comida' : 'bebida'; // o filtro está sendo salvo no localStorage com os nomes em portugues
           if (cat === 'all') filterName = cat; // para poder filtrar corretamente criei essa lógica para simplificar o estado do filtro
           return (
-            <div key={ i }>
-              <input
-                type="checkbox"
-                className="btn-check"
-                name="btnradio"
-                id={ cat }
-                autoComplete="off"
-                onChange={ () => setFilter(filterName) }
-                checked={ filter === filterName }
-              />
-              <label
-                className="btn btn-outline-primary"
-                htmlFor={ cat }
-                data-testid={ `filter-by-${cat}-btn` }
-              >
-                { cat }
-                <input className="btn-check" type="radio" />
-              </label>
-            </div>
+            <CategoryButton
+              type="button"
+              id={ cat }
+              onClick={ () => setFilter(filterName) }
+              disabled={ filter === filterName }
+              key={ i }
+            >
+              { cat }
+            </CategoryButton>
           );
         }) }
-      </div>
+      </CategoriesContainer>
       { Array.isArray(favoriteRecipes) && favoriteRecipes // Sem checar se recipes done é um array a pagina não carrega em alguns testes
         .filter((rec) => filter === 'all' || rec.type === filter)
         .map((rec, i) => (
