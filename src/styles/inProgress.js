@@ -25,6 +25,7 @@ export const RecipeButtonContainer = styled.div`
 `;
 
 export const RecipeButton = styled.button`
+  background: transparent;
   border: none;
 `;
 

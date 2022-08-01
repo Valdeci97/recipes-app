@@ -1,27 +1,14 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
+import * as S from '../styles/doneRecipes';
 
 const copy = require('clipboard-copy');
 
 export default function DoneRecipeCard({ recipe, index }) {
-  const [showToast, setShowToast] = useState(
-    <span className="copied-link">Link copiado!</span>,
-  );
-
-  // Função criada separadamente pq o toast gerado no context ativaria para todos os cards simultaneamente
   function showIndividualToast(link) {
-    const THREE_SECONDS = 3000;
     copy(link);
-    setShowToast(
-      <span className="copied-link copied-link--active">Link copiado!</span>,
-    );
-    return setTimeout(() => {
-      setShowToast(
-        <span className="copied-link">Link copiado!</span>,
-      );
-    }, THREE_SECONDS);
   }
 
   const {
@@ -39,24 +26,20 @@ export default function DoneRecipeCard({ recipe, index }) {
   link[3] = `${type}s`;
   link[4] = id; // Tratamento do link para o botão de compartilhamento
   return (
-    <div // Container do card
-      data-testid={ `${index}-recipe-card` }
-    >
-      <Link to={ `/${type}s/${id}` }>
-        <img
+    <S.Container data-testid={ `${index}-recipe-card` }>
+      <S.Link href={ `/${type}s/${id}` }>
+        <S.Image
           src={ image }
           alt={ `${area} meal` }
           data-testid={ `${index}-horizontal-image` }
-          width={ 130 }
         />
-      </Link>
-      <div>
-        {showToast}
-        <div style={ { display: 'flex', justifyContent: 'space-between', width: 180 } }>
+      </S.Link>
+      <S.doneRecipeInfo>
+        <S.ShareContainer>
           <span className="recipe-type" data-testid={ `${index}-horizontal-top-text` }>
             { `${alcoholicOrNot.length > 0 ? alcoholicOrNot : area} - ${category}` }
           </span>
-          <button
+          <S.ShareButton
             type="button"
             onClick={ () => showIndividualToast(link.join('/')) }
             style={ { justifySelf: 'flex-end' } }
@@ -66,33 +49,34 @@ export default function DoneRecipeCard({ recipe, index }) {
               src={ shareIcon }
               alt="Share Icon"
             />
-          </button>
-        </div>
-        <Link to={ `/${type}s/${id}` }>
+          </S.ShareButton>
+        </S.ShareContainer>
+        <S.Link href={ `/${type}s/${id}` }>
           <h6
             data-testid={ `${index}-horizontal-name` }
           >
             {name}
           </h6>
-        </Link>
-        <span data-testid={ `${index}-horizontal-done-date` }>
+        </S.Link>
+        <span
+          data-testid={ `${index}-horizontal-done-date` }
+          style={ { textAlign: 'center' } }
+        >
           { `Feita em: ${doneDate}` }
         </span>
         <div>
           Tags:&nbsp;
           { tags.map((tag) => (
-            <div
+            <span
               key={ tag }
-              className="badge rounded-pill"
               data-testid={ `0-${tag}-horizontal-tag` }
             >
-              { tag }
-&nbsp;
-            </div>
+              &nbsp;{ tag }
+            </span>
           )) }
         </div>
-      </div>
-    </div>
+      </S.doneRecipeInfo>
+    </S.Container>
   );
 }
 
