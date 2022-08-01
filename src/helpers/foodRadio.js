@@ -1,7 +1,5 @@
 import requests, { NAME, INGREDIENT, FIRST_LETTER } from './radioStuff/requests';
 
-// const MAX_CARDS = 12;
-
 export default async function foodRadio(input, radioInput) {
   if (input === '') {
     global.alert('Campo de pesquisa não preenchido');

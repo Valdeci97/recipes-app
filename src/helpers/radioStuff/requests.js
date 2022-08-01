@@ -9,8 +9,6 @@ const DRINK_NAME_URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s
 const DRINK_INGREDIENT_URL = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=';
 const DRINK_FIRST_LETTER_URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=';
 
-// const MAX_CARDS = 12;
-
 const foodNameFecth = async (name) => {
   try {
     const request = await fetch(`${FOOD_NAME_URL}${name}`);
